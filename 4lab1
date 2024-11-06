@@ -1,0 +1,34 @@
+import unittest
+from app import find_most_common_word
+
+
+class TestFindMostCommonWord(unittest.TestCase):
+
+    def test_single_word(self):
+        text = "ABA"
+        result = find_most_common_word(text)
+        self.assertEqual(result, ("ABA", 1))
+
+    def test_multiple_words(self):
+        text = "GPO ASTD ASTD"
+        result = find_most_common_word(text)
+        self.assertEqual(result, ("ASTD", 2))
+
+    def test_case_insensitivity(self):
+        text = "ASTD asTD AStd astd AstD"
+        result = find_most_common_word(text)
+        self.assertEqual(result, ("astd", 5))
+
+    def test_no_words(self):
+        text = ""
+        result = find_most_common_word(text)
+        self.assertEqual(result, (None, 0))
+
+    def test_special_characters(self):
+        text = "GPO&%&&^%&%&*%*HUHGhuyghgABAijfABA"
+        result = find_most_common_word(text)
+        self.assertEqual(result, ("ABA", 2))
+
+
+if __name__ == "__main__":
+    unittest.main()
